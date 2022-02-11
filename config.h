@@ -198,8 +198,18 @@ static MouseShortcut mshortcuts[] = {
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
+// from @LukeSmithxyz
+static char *openurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -o", "externalpipe", NULL };
+static char *copyurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -c", "externalpipe", NULL };
+static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
+
+
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
+       { Mod1Mask, XK_l,           externalpipe,   {.v = openurlcmd } },
+       { Mod1Mask,             XK_y,           externalpipe,   {.v = copyurlcmd } },
+       { Mod1Mask,             XK_o,           externalpipe,   {.v = copyoutput } },
+
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
